@@ -1,6 +1,8 @@
 package com.hkimbrough22.songr.controllers;
 
 import com.hkimbrough22.songr.models.Album;
+import com.hkimbrough22.songr.repositories.AlbumRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +11,10 @@ import java.util.ArrayList;
 
 @Controller
 public class AlbumsController {
+
+    @Autowired
+    AlbumRepository albumRepository;
+
     @GetMapping("/albums")
     public String generateAlbums(Model album) {
         ArrayList<Album> albums = new ArrayList<>();
@@ -19,6 +25,7 @@ public class AlbumsController {
         albums.add(album2);
         albums.add(album3);
         album.addAttribute("albums", albums);
+        albumRepository.save(album1);
         return "albums";
     }
 }
