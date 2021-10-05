@@ -8,9 +8,27 @@
     <title>Albums</title>
 </head>
 <body>
+
+<form action="/albums" method="post">
+    <fieldset>
+        <legend>Add Album</legend>
+        <label for="title">Album Name</label>
+        <input type="text" name="title">
+        <label for="artist">Artist</label>
+        <input type="text" name="artist">
+        <label for="songCount">Number of Songs</label>
+        <input type="text" name="songCount">
+        <label for="length">Length of Album (in seconds)</label>
+        <input type="text" name="length">
+        <label for="imgUrl">Album Image</label>
+        <input type="text" name="imgUrl">
+        <input type="submit" value="Add Album">
+    </fieldset>
+</form>
+
 <ul th:each="album : ${albums}">
     <li th:text="'Album Name: ' + ${album.title}"></li>
-    <li th:text="'Album Author: ' + ${album.artist}"></li>
+    <li th:text="'Author: ' + ${album.artist}"></li>
     <li th:text="'Number of Songs: ' + ${album.songCount}"></li>
     <li><img th:src="${album.imgUrl}" src="test" alt="test"></li>
 </ul>

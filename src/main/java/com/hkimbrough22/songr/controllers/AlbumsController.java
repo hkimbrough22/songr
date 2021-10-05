@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class AlbumsController {
@@ -17,15 +20,17 @@ public class AlbumsController {
 
     @GetMapping("/albums")
     public String generateAlbums(Model album) {
-        ArrayList<Album> albums = new ArrayList<>();
-        Album album1 = new Album("HellerWorld", "Jean-Claude", 12, 900, "test");
-        Album album2 = new Album("HolaWorld", "Me", 10, 980, "test");
-        Album album3 = new Album("Hellow World", "You", 11, 9000, "test");
-        albums.add(album1);
-        albums.add(album2);
-        albums.add(album3);
+        List<Album> albums = albumRepository.findAll();
         album.addAttribute("albums", albums);
-        albumRepository.save(album1);
+//        albumRepository.saveAll(albums);
         return "albums";
+    }
+
+    @PostMapping("/albums")
+    public RedirectView createAlbum(String title, String artist, int songCount, int length, String imgUrl){
+        Album newAlbum = new Album(title, artist, songCount, length, imgUrl);
+        albumRepository.save(newAlbum);
+
+        return new RedirectView("/albums");
     }
 }
