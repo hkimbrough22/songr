@@ -66,8 +66,4 @@ public class Album {
         this.imgUrl = imgUrl;
     }
 
-    //    @Override
-//    public String toString() {
-//
-//    }
 }
