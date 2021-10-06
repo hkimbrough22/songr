@@ -1,11 +1,22 @@
 package com.hkimbrough22.songr.models;
 
+import javax.persistence.*;
+
+@Entity
 public class Album {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    long id;
+
     String title;
     String artist;
     int songCount;
     int length;
     String imgUrl;
+
+    protected Album(){
+
+    }
 
     public Album(String title, String artist, int songCount, int length, String imgUrl) {
         this.title = title;
@@ -55,8 +66,4 @@ public class Album {
         this.imgUrl = imgUrl;
     }
 
-    //    @Override
-//    public String toString() {
-//
-//    }
 }
