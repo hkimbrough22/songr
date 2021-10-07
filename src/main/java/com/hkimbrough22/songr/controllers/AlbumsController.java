@@ -24,16 +24,16 @@ public class AlbumsController {
         List<Album> albums = albumRepository.findAll();
         album.addAttribute("albums", albums);
 //        albumRepository.saveAll(albums);
-        return "albums";
+        return "albums.html";
     }
 
-//    @GetMapping("/albums/{albumID}")
-//    public RedirectView displaySpecificAlbum(Model m, @PathVariable Long albumID){
-//        Album albumToDisplay = albumRepository.getById(albumID);
-//        m.addAttribute("album", albumToDisplay);
-//        return new RedirectView("/album");
-//    }
-
+    @GetMapping("/album")
+    public String displaySpecificAlbum(Model m, String albumTitle){
+        Album albumToDisplay = albumRepository.findByTitle(albumTitle);
+        m.addAttribute("album", albumToDisplay);
+//        http://localhost:8080/album?albumTitle=Bananas
+        return "album.html";
+    }
 
     @PostMapping("/albums")
     public RedirectView createAlbum(String title, String artist, int songCount, int length, String imgUrl){
