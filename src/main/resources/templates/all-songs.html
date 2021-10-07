@@ -1,14 +1,19 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Capitalize</title>
+    <title>All Songs</title>
 </head>
 <body>
-    <link rel="stylesheet" href="/capitalize.css">
-<h1 th:text="${CapText}">TEXT</h1>
+    <ul th:each="album : ${albums}">
+        <li>
+
+        </li>
+
+    </ul>
+
 </body>
 </html>

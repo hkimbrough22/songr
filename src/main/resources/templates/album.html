@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title th:text="${album.title}">Test</title>
+</head>
+<body>
+<h1 th:text="${album.title}"></h1>
+<div>
+    Songs:
+</div>
+<ul th:each="song : ${album.songsOnThisAlbum}">
+    <li th:text="${song.trackNumber} + '. ' + ${song.title} + ' (' + ${song.length} + ' seconds)'"></li>
+</ul>
+<form action="/add-song" method="post">
+    <fieldset>
+        <legend>Add Song</legend>
+        <label for="title">Title</label>
+        <input type="text" name="songTitle">
+        <label for="length">Length (in seconds) </label>
+        <input type="text" name="songLength">
+        <label for="trackNumber">Track Number</label>
+        <input type="text" name="trackNumber">
+        <input type="hidden" name="albumName" th:value="${album.title}">
+        <input type="submit" value="Add Song">
+    </fieldset>
+</form>
+</body>
+</html>
