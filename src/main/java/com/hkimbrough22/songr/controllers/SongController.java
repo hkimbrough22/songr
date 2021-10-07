@@ -6,6 +6,7 @@ import com.hkimbrough22.songr.repositories.AlbumRepository;
 import com.hkimbrough22.songr.repositories.SongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -20,11 +21,12 @@ public class SongController {
     SongRepository songRepository;
 
     @PostMapping("/add-song")
-    public RedirectView addSongToAlbum(String songTitle, int songLength, int trackNumber, String albumName){
+    public RedirectView addSongToAlbum(Model m, String songTitle, int songLength, int trackNumber, String albumName){
         Album album = albumRepository.findByTitle(albumName);
         Song newSong = new Song(songTitle, songLength, trackNumber, album);
         songRepository.save(newSong);
+        m.addAttribute("album", album);
 
-        return new RedirectView("/albums");
+        return new RedirectView("/album");
     }
 }
